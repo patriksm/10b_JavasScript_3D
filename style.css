@@ -11,7 +11,6 @@
     height: inherit;
     width: inherit;
     transform-style: preserve-3d;
-    transform: translate3d(300px, 250px, 0px) rotateX(-30deg) rotateY(0deg) rotateZ(0deg);
 }
 
 #square1 {
@@ -27,4 +26,32 @@
     width:200px;
     background: rgba(255, 255 , 0, 0.5);
     transform: translate3d(0px, 100px, -100px) rotateX(90deg) rotateY(0deg) rotateZ(0deg);
+}
+#square3 {
+    position: absolute;
+    height: 200px;
+    width:200px;
+    background: rgba(25, 187, 228, 0.5);
+    transform: translate3d(0px, 0px, -200px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+#square4{
+    position: absolute;
+    height: 200px;
+    width:200px;
+    background: rgba(238, 23, 238, 0.5);
+    transform: translate3d(0px, -100px, -100px) rotateX(90deg) rotateY(0deg) rotateZ(0deg);
+}
+#square5{
+    position: absolute;
+    height: 200px;
+    width:200px;
+    background: rgba(120, 243, 19, 0.5);
+    transform: translate3d(-100px, 0px, -100px) rotateX(0deg) rotateY(90deg) rotateZ(0deg);
+}
+#square6{
+    position: absolute;
+    height: 200px;
+    width:200px;
+    background: rgba(143, 93, 0, 0.5);
+    transform: translate3d(100px, 0px, -100px) rotateX(0deg) rotateY(90deg) rotateZ(0deg);
 }
