@@ -4,6 +4,7 @@
     width: 1200px;
     border: 2px solid #000000;
     perspective: 600px;
+    overflow: hidden;
 }
 
 #world {
@@ -27,4 +28,25 @@
     width:200px;
     background: rgba(255, 255 , 0, 0.5);
     transform: translate3d(0px, 100px, -100px) rotateX(90deg) rotateY(0deg) rotateZ(0deg);
+}
+#square3 {
+    position: absolute;
+    height: 200px;
+    width:200px;
+    background: rgba(0, 153, 255, 0.5);
+    transform: translate3d(0px, -100px, -100px) rotateX(90deg) rotateY(0deg) rotateZ(0deg);
+}
+#square4 {
+    position: absolute;
+    height: 200px;
+    width:200px;
+    background: rgba(204, 0, 255, 0.5);
+    transform: translate3d(0px, 0px, -200px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+#square5 {
+    position: absolute;
+    height: 200px;
+    width:200px;
+    background: rgba(255, 51, 0, 0.5);
+    transform: translate3d(100px, 0px, -100px) rotateX(0deg) rotateY(90deg) rotateZ(90deg);
 }
