@@ -14,6 +14,7 @@ let x_rot = -30
 let y_rot = 0
 let z_rot = 0
 
+
 function movement() {
     //Kustība
     // d taustiņš
