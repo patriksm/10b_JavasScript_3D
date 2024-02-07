@@ -1,15 +1,18 @@
+hr {
+    margin-left: 88%;
+}
+
+p {
+    margin-left: 88%;
+}
+
 #container {
     position: absolute;
     height: 95%;
-    width: 95%;
+    width: 85%;
     border: 2px solid #000000;
     perspective: 600px;
     overflow: hidden;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
 }
 
 #world {

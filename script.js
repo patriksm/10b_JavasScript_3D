@@ -5,7 +5,7 @@ document.addEventListener("keydown", whenButtonIsPressed)
 var world = document.getElementById('world')
 
 //Kustības ātruma lielumi
-var movementSpeed = 20
+var movementSpeed = 10
 var setMovementSpeed
 
 //Kustības koordinātes
@@ -34,7 +34,7 @@ function whenButtonIsPressed() {
     //Kustības ātrums
     // p tautsiņš dos lodziņu ātruma maiņai
     if (event.keyCode == 80) {
-        setMovementSpeed = Number(prompt("Enter a number to change movement speed.", "20"))
+        setMovementSpeed = Number(prompt("Enter a number to change movement speed.", "10"))
         if (!isNaN(setMovementSpeed)) {
             movementSpeed = setMovementSpeed
         } else {
@@ -98,8 +98,26 @@ function whenButtonIsPressed() {
     }
 }
 
-function render() {
+//Lai rādītu vērtības
+function settingsValues() {
+    document.getElementById("movementSpeed").textContent = "Movement speed: " + movementSpeed + "px"
+
+    document.getElementById("xdir").textContent = "x: " + x_dir
+    document.getElementById("ydir").textContent = "y: " + y_dir
+    document.getElementById("zdir").textContent = "z: " + z_dir
+
+    document.getElementById("xrot").textContent = "x: " + x_rot
+    document.getElementById("yrot").textContent = "y: " + y_rot
+    document.getElementById("zrot").textContent = "z: " + z_rot
+}
+
+function  game() {
     world.style.transform = `translate3d(${x_dir}px, ${y_dir}px, ${z_dir}px) rotateX(${x_rot}deg) rotateY(${y_rot}deg) rotateZ(${z_rot}deg)`;
+}
+
+function render() {
+    game()
+    settingsValues()
 
     myReq = requestAnimationFrame(render)
 }
