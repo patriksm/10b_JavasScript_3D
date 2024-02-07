@@ -3,6 +3,10 @@
 document.addEventListener("keydown", whenButtonIsPressed)
 
 var world = document.getElementById('world')
+var container = document.getElementById('container')
+var infoWindow = document.getElementById('infoWindow')
+
+var isInfoPanelOpen = false
 
 //Kustības ātruma lielumi
 var movementSpeed = 10
@@ -20,6 +24,13 @@ let z_rot = 0
 
 
 function whenButtonIsPressed() {
+    // i taustiņš parādīs informācijas logu
+    if (event.keyCode == 73) {
+        isInfoPanelOpen = !isInfoPanelOpen
+    }
+    console.log("Is info panel open: ", isInfoPanelOpen)
+
+
     // r taustiņš restartē pozīciju/atrašanās vietu
     if (event.keyCode == 82) {
         x_dir = 500
@@ -98,26 +109,75 @@ function whenButtonIsPressed() {
     }
 }
 
-//Lai rādītu vērtības
-function settingsValues() {
-    document.getElementById("movementSpeed").textContent = "Movement speed: " + movementSpeed + "px"
-
-    document.getElementById("xdir").textContent = "x: " + x_dir
-    document.getElementById("ydir").textContent = "y: " + y_dir
-    document.getElementById("zdir").textContent = "z: " + z_dir
-
-    document.getElementById("xrot").textContent = "x: " + x_rot
-    document.getElementById("yrot").textContent = "y: " + y_rot
-    document.getElementById("zrot").textContent = "z: " + z_rot
-}
-
 function  game() {
     world.style.transform = `translate3d(${x_dir}px, ${y_dir}px, ${z_dir}px) rotateX(${x_rot}deg) rotateY(${y_rot}deg) rotateZ(${z_rot}deg)`;
 }
 
+//Informācijas logs
+function infoPanel() {
+    if (!isInfoPanelOpen) {
+        container.style.width = `98%`
+
+        infoWindow.style.width = `0%`
+        infoWindow.style.marginRight = `0%`
+        infoWindow.style.marginLeft = `0%`
+        infoWindow.style.padding = `0%`
+
+        infoWindow.innerHTML = ``
+    } 
+    else if (isInfoPanelOpen) {
+        container.style.width = `84%`
+
+        infoWindow.style.width = `10%`
+        infoWindow.style.marginRight = `2%`
+        infoWindow.style.marginLeft = `1%`
+        infoWindow.style.padding = `1%`
+
+        infoWindow.innerHTML = `
+        <h5>The Information Panel</h5>
+        <hr>
+        <p>Movement speed: ${movementSpeed}px
+        <hr>
+        Camera coordinates:<br>
+        x: ${x_dir}<br>
+        y: ${y_dir}<br>
+        z: ${z_dir}
+        <hr>
+        Camera rotation:<br>
+        x: ${x_rot}<br>
+        y: ${y_rot}<br>
+        z: ${z_rot}
+        <hr>
+        </p>
+        <p id="finePrint">
+        Movement controls:<br>
+        w: move forward<br>
+        a: move left<br>
+        s: move backward<br>
+        d: move right<br>
+        spacebar: move up<br>
+        shift: move down<br>
+        q: turn left<br>
+        e: turn rigth<br>
+        arrow up: tilt forward<br>
+        arrow left: tilt left<br>
+        arrow down: tilt backward<br>
+        arrow right: tilt right</p>
+        <hr>
+        <p id="finePrint">Other functions:<br>
+        r: reset back to starting position<br>
+        i: open & close the information panel<br>
+        p: change movement speed
+        </p>`
+    } 
+    else {
+        alert("Info Panel has FAILED!")
+    }
+}
+
 function render() {
     game()
-    settingsValues()
+    infoPanel()
 
     myReq = requestAnimationFrame(render)
 }

@@ -1,15 +1,20 @@
-hr {
-    margin-left: 88%;
+#finePrint {
+    font-style: italic;
+    font-size: 8px;
 }
 
-p {
-    margin-left: 88%;
+div {
+    display: inline-block;
+}
+
+#infoWindow {
+    background-color: rgb(229, 229, 229);
+    height: 95%;
 }
 
 #container {
     position: absolute;
     height: 95%;
-    width: 85%;
     border: 2px solid #000000;
     perspective: 600px;
     overflow: hidden;
