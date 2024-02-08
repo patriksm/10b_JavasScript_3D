@@ -31,28 +31,6 @@ let keymap = {
     Space : false, ShiftLeft : false, 
     ArrowUp : false, ArrowDown : false, ArrowRight : false, ArrowLeft : false, }
 
-function whenButtonIsPressed() {
-
-    //Rotācija
-    // up_arrow taustiņš
-    if (event.code == 'ArrowUp') {
-        x_rot -= movementSpeed
-    }
-    // down_arrow taustiņš
-    if (event.code == 'ArrowDown') {
-        x_rot += movementSpeed
-    }
-    // right_arrow taustiņš
-    if (event.code == 'ArrowRight') {
-        z_rot += movementSpeed
-    }
-    // left_arrow taustiņš
-    if (event.code == 'ArrowLeft') {
-        z_rot -= movementSpeed
-    }
-}
-
-
 function onKeyPress( event ) {
     
     if ( keymap[ event.code ] != null ) {
