@@ -21,7 +21,7 @@ let isInfoPanelOpen = false
 let movementSpeed = 6
 let sensitivity = 0.2
 
-let position = vec3( 500, 250, 0 )
+let position = vec3( 500, 360, 0 )
 let rotation = vec3( -30, 45, 0 )
 
 //Util function
@@ -52,7 +52,7 @@ function onKeyRelese( event ) {
       
         return
     }else if ( event.code == 'KeyR' ) {
-        position = vec3( 500, 250, 0 )
+        position = vec3( 500, 360, 0 )
         rotation = vec3( -30, 0, 0 )
       
         return
