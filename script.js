@@ -49,10 +49,12 @@ function onKeyRelese( event ) {
 
     if ( event.code == 'KeyI' ) {
         isInfoPanelOpen = !isInfoPanelOpen
+      
         return
     }else if ( event.code == 'KeyR' ) {
         position = vec3( 500, 250, 0 )
         rotation = vec3( -30, 0, 0 )
+      
         return
     }
 
@@ -115,6 +117,7 @@ function updatePlayerMovement() {
 }
 
 function drawInfoPanel() {
+
     if (!isInfoPanelOpen) {
         container.style.width = `98%`
 
@@ -144,10 +147,13 @@ function drawInfoPanel() {
         y: ${ position.y }<br>
         z: ${ position.z }
         <hr>
+        
         Players camera rotation:<br>
+        
         x: ${ rotation.x }<br>
         y: ${ rotation.y }<br>
         z: ${ rotation.z }
+
         <hr>
         </p>
         <p id="finePrint">
@@ -156,6 +162,7 @@ function drawInfoPanel() {
         a: move left<br>
         s: move backward<br>
         d: move right<br>
+        
         shift: sprint<br>
         <hr>
         <p id="finePrint">Other functions:<br>
