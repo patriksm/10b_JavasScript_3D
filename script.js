@@ -115,6 +115,17 @@ function  game() {
 
 //Informācijas logs
 function infoPanel() {
+
+    // grādi neiet pāri  360 grādiem
+    let x_deg = x_rot % 360;
+    let y_deg = y_rot % 360;
+    let z_deg = z_rot % 360;
+
+    // grādi neiet negatīvā
+    if(x_deg < 0) x_deg = 360 + x_deg;
+    if(y_deg < 0) y_deg = 360 + y_deg;
+    if(z_deg < 0) z_deg = 360 + z_deg;
+
     if (!isInfoPanelOpen) {
         container.style.width = `98%`
 
@@ -126,12 +137,12 @@ function infoPanel() {
         infoWindow.innerHTML = ``
     } 
     else if (isInfoPanelOpen) {
-        container.style.width = `84%`
+        container.style.width = `80%`
 
-        infoWindow.style.width = `10%`
-        infoWindow.style.marginRight = `2%`
-        infoWindow.style.marginLeft = `1%`
-        infoWindow.style.padding = `1%`
+        infoWindow.style.width = `15%`
+        infoWindow.style.marginRight = `3%`
+        infoWindow.style.marginLeft = `2%`
+        infoWindow.style.padding = `2%`
 
         infoWindow.innerHTML = `
         <h5>The Information Panel</h5>
@@ -144,9 +155,9 @@ function infoPanel() {
         z: ${z_dir}
         <hr>
         Camera rotation:<br>
-        x: ${x_rot}<br>
-        y: ${y_rot}<br>
-        z: ${z_rot}
+        x: ${xRot}<br>
+        y: ${yRot}<br>
+        z: ${zRot}
         <hr>
         </p>
         <p id="finePrint">
