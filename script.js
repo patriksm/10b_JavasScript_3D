@@ -1,10 +1,10 @@
 //  https://www.toptal.com/developers/keycode
+const world = document.getElementById('world')
+const container = document.getElementById('container')
+const infoWindow = document.getElementById('infoWindow')
 
-document.addEventListener("keydown", whenButtonIsPressed)
-
-var world = document.getElementById('world')
-var container = document.getElementById('container')
-var infoWindow = document.getElementById('infoWindow')
+document.addEventListener("keydown", onKeyPress)
+document.addEventListener("keyup", onKeyRelese)
 
 var isInfoPanelOpen = false
 
@@ -13,108 +13,119 @@ var movementSpeed = 10
 var setMovementSpeed
 
 //Kustības koordinātes
-let x_dir = 500
-let z_dir = 0
-let y_dir = 250
+let position = vec3( 500, 250, 0 )
+let rotation = vec3( -30, 0, 0 )
 
-//Rotācijas grādi
-let x_rot = -30
-let y_rot = 0
-let z_rot = 0
+//Util function
+function vec3( x = 0, y = 0, z = 0 ) {
+    return {
+        x : x,
+        y : y,
+        z : z,
+    }
+}
 
+//pressed keys
+let keymap = { 
+    KeyA : false, KeyD : false, KeyW : false, KeyS : false, KeyQ : false, KeyE : false, 
+    Space : false, ShiftLeft : false, 
+    ArrowUp : false, ArrowDown : false, ArrowRight : false, ArrowLeft : false, }
 
 function whenButtonIsPressed() {
-    // i taustiņš parādīs informācijas logu
-    if (event.keyCode == 73) {
+
+    //Rotācija
+    // up_arrow taustiņš
+    if (event.code == 'ArrowUp') {
+        x_rot -= movementSpeed
+    }
+    // down_arrow taustiņš
+    if (event.code == 'ArrowDown') {
+        x_rot += movementSpeed
+    }
+    // right_arrow taustiņš
+    if (event.code == 'ArrowRight') {
+        z_rot += movementSpeed
+    }
+    // left_arrow taustiņš
+    if (event.code == 'ArrowLeft') {
+        z_rot -= movementSpeed
+    }
+}
+
+
+function onKeyPress( event ) {
+    
+    if ( keymap[ event.code ] != null ) {
+        keymap[ event.code ] = true
+    }
+}
+function onKeyRelese( event ) {
+
+    if ( event.code == 'KeyI' ) {
         isInfoPanelOpen = !isInfoPanelOpen
-    }
-    console.log("Is info panel open: ", isInfoPanelOpen)
-
-
-    // r taustiņš restartē pozīciju/atrašanās vietu
-    if (event.keyCode == 82) {
-        x_dir = 500
-        z_dir = 0
-        y_dir = 250
-        x_rot = -30
-        y_rot = 0
-        z_rot = 0
-    }
-
-
-    //Kustības ātrums
-    // p tautsiņš dos lodziņu ātruma maiņai
-    if (event.keyCode == 80) {
+        return
+    }else if ( event.code == 'KeyR' ) {
+        position = vec3( 500, 250, 0 )
+        orientation = vec3( -30, 0, 0 )
+        return
+    }else if( event.code == 'KeyP' ) {
         setMovementSpeed = Number(prompt("Enter a number to change movement speed.", "10"))
         if (!isNaN(setMovementSpeed)) {
             movementSpeed = setMovementSpeed
         } else {
             alert("Please enter a number!")
         }
-        console.log("Movement Speed: " + movementSpeed)
-        console.log("Set movement Speed: " + setMovementSpeed)
+        return
     }
 
-    
-    //Kustība
-    // d taustiņš
-    if (event.keyCode == 68) {
-        x_dir -= movementSpeed
-    }
-    // a taustiņš
-    if (event.keyCode == 65) {
-        x_dir += movementSpeed
-    }
-    // w taustiņš
-    if (event.keyCode == 87) {
-        z_dir += movementSpeed
-    }
-    // s taustiņš
-    if (event.keyCode == 83) {
-        z_dir -= movementSpeed
-    }
-    // spacebar taustiņš
-    if (event.keyCode == 32) {
-        y_dir += movementSpeed
-    }
-    // left_shift taustiņš
-    if (event.keyCode == 16) {
-        y_dir -= movementSpeed
-    }
-
-    //Rotācija
-    // up_arrow taustiņš
-    if (event.keyCode == 38) {
-        x_rot -= movementSpeed
-    }
-    // down_arrow taustiņš
-    if (event.keyCode == 40) {
-        x_rot += movementSpeed
-    }
-    // e taustiņš
-    if (event.keyCode == 69) {
-        y_rot += movementSpeed
-    }
-    // q taustiņš
-    if (event.keyCode == 81) {
-        y_rot -= movementSpeed
-    }
-    // right_arrow taustiņš
-    if (event.keyCode == 39) {
-        z_rot += movementSpeed
-    }
-    // left_arrow taustiņš
-    if (event.keyCode == 37) {
-        z_rot -= movementSpeed
+    if ( keymap[ event.code ] != null ) {
+        keymap[ event.code ] = false
     }
 }
 
-function  game() {
-    world.style.transform = `translate3d(${x_dir}px, ${y_dir}px, ${z_dir}px) rotateX(${x_rot}deg) rotateY(${y_rot}deg) rotateZ(${z_rot}deg)`;
+function updateWorld() {
+    world.style.transform = `translate3d(${ position.x }px, ${ position.y }px, ${ position.z }px) rotateX(${ rotation.x }deg) rotateY(${ rotation.y }deg) rotateZ(${ rotation.z }deg)`;
+}
+
+function updatePlayerMovement() {
+    if ( keymap.KeyA ) {
+        position.x += movementSpeed
+    }
+    if ( keymap.KeyD ) {
+        position.x -= movementSpeed
+    }
+
+    if ( keymap.KeyW ) {
+        position.z += movementSpeed
+    }
+    if ( keymap.KeyS ) {
+        position.z -= movementSpeed
+    }
+
+    if ( keymap.KeyE ) {
+        position.y += movementSpeed
+    }
+    if ( keymap.KeyQ ) {
+        position.y -= movementSpeed
+    }
+
+    if ( keymap.ArrowLeft ) {
+        rotation.y -= movementSpeed
+    }
+    if ( keymap.ArrowRight ) {
+        rotation.y += movementSpeed
+    }
+
+    if ( keymap.ArrowUp ) {
+        rotation.x -= movementSpeed
+    }
+    if ( keymap.ArrowDown ) {
+        rotation.x += movementSpeed
+    }
 }
 
 //Informācijas logs
-function infoPanel() {
+function drawInfoPanel() {
     if (!isInfoPanelOpen) {
         container.style.width = `98%`
 
@@ -176,8 +187,11 @@ function infoPanel() {
 }
 
 function render() {
-    game()
-    infoPanel()
+    
+    updatePlayerMovement()
+    
+    drawInfoPanel()
+    updateWorld()
 
     myReq = requestAnimationFrame(render)
 }
