@@ -125,6 +125,7 @@ function infoPanel() {
     if(x_deg < 0) x_deg = 360 + x_deg;
     if(y_deg < 0) y_deg = 360 + y_deg;
     if(z_deg < 0) z_deg = 360 + z_deg;
+    // 
 
     if (!isInfoPanelOpen) {
         container.style.width = `98%`
