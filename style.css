@@ -97,3 +97,26 @@
     background: rgba(21, 0, 211, 0.5);
     transform: translate3d(-900px, -100px, -100px) rotateX(0deg) rotateY(90deg) rotateZ(0deg);
 }
+
+/* priekša */
+#prieksa1{
+    position: absolute;
+    height: 300px;
+    width: 400px;
+    background: rgba(143, 93, 0, 1);
+    transform: translate3d(200px, -100px, 400px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+#prieksa2{
+    position: absolute;
+    height: 300px;
+    width: 400px;
+    background: rgba(143, 93, 0, 1);
+    transform: translate3d(-400px, -100px, 400px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+#prieksa3{
+    position: absolute;
+    height: 100px;
+    width: 210px;
+    background: rgba(143, 93, 0, 1);
+    transform: translate3d(-5px, -100px, 400px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
