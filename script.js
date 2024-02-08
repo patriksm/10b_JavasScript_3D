@@ -3,18 +3,26 @@ const world = document.getElementById('world')
 const container = document.getElementById('container')
 const infoWindow = document.getElementById('infoWindow')
 
-document.addEventListener("keydown", onKeyPress)
-document.addEventListener("keyup", onKeyRelese)
+const deg = Math.PI / 180
 
-var isInfoPanelOpen = false
+document.addEventListener( "keydown", onKeyPress )
+document.addEventListener( "keyup", onKeyRelese )
+document.addEventListener( "mousemove", onMouseMove )
 
-//Kustības ātruma lielumi
-var movementSpeed = 10
-var setMovementSpeed
+document.addEventListener( "pointerlockchange", () => { lockedPointer = !lockedPointer } )
 
-//Kustības koordinātes
+container.onclick = function() {
+    container.requestPointerLock()
+}
+
+let lockedPointer = false
+let isInfoPanelOpen = false
+
+let movementSpeed = 6
+let sensitivity = 0.2
+
 let position = vec3( 500, 250, 0 )
-let rotation = vec3( -30, 0, 0 )
+let rotation = vec3( -30, 45, 0 )
 
 //Util function
 function vec3( x = 0, y = 0, z = 0 ) {
@@ -25,11 +33,11 @@ function vec3( x = 0, y = 0, z = 0 ) {
     }
 }
 
-//pressed keys
+//Event callbacks
 let keymap = { 
     KeyA : false, KeyD : false, KeyW : false, KeyS : false, KeyQ : false, KeyE : false, 
-    Space : false, ShiftLeft : false, 
-    ArrowUp : false, ArrowDown : false, ArrowRight : false, ArrowLeft : false, }
+    Space : false, ShiftLeft : false, KeyZ : false,
+}
 
 function onKeyPress( event ) {
     
@@ -44,15 +52,7 @@ function onKeyRelese( event ) {
         return
     }else if ( event.code == 'KeyR' ) {
         position = vec3( 500, 250, 0 )
-        orientation = vec3( -30, 0, 0 )
-        return
-    }else if( event.code == 'KeyP' ) {
-        setMovementSpeed = Number(prompt("Enter a number to change movement speed.", "10"))
-        if (!isNaN(setMovementSpeed)) {
-            movementSpeed = setMovementSpeed
-        } else {
-            alert("Please enter a number!")
-        }
+        rotation = vec3( -30, 0, 0 )
         return
     }
 
@@ -60,45 +60,48 @@ function onKeyRelese( event ) {
         keymap[ event.code ] = false
     }
 }
+function onMouseMove( event ) {
+    if ( !lockedPointer ) return
+
+    rotation.y += event.movementX * sensitivity
+    rotation.x -= event.movementY * sensitivity
+}
+
+//Update functions
 
 function updateWorld() {
-    world.style.transform = `translate3d(${ position.x }px, ${ position.y }px, ${ position.z }px) rotateX(${ rotation.x }deg) rotateY(${ rotation.y }deg) rotateZ(${ rotation.z }deg)`;
+    world.style.transform = 
+        `translateZ( 600px ) rotateX( ${ rotation.x }deg ) rotateY( ${ rotation.y }deg ) translate3d(${ position.x }px, ${ position.y }px, ${ position.z }px)`
 }
 
 function updatePlayerMovement() {
-    if ( keymap.KeyA ) {
-        position.x += movementSpeed
-    }
-    if ( keymap.KeyD ) {
-        position.x -= movementSpeed
+    let facingVector = vec3(
+        Math.cos( rotation.y * deg ),
+        Math.sin( rotation.y * deg ),
+    )
+
+    if ( keymap.ShiftLeft ) {
+        movementSpeed = 10
+    }else {
+        movementSpeed = 6
     }
 
     if ( keymap.KeyW ) {
-        position.z += movementSpeed
+        position.z += facingVector.x * movementSpeed
+        position.x -= facingVector.y * movementSpeed
     }
     if ( keymap.KeyS ) {
-        position.z -= movementSpeed
+        position.z -= facingVector.x * movementSpeed
+        position.x += facingVector.y * movementSpeed
     }
 
-    if ( keymap.KeyE ) {
-        position.y += movementSpeed
+    if ( keymap.KeyA ) {
+        position.x += facingVector.x * movementSpeed
+        position.z += facingVector.y * movementSpeed
     }
-    if ( keymap.KeyQ ) {
-        position.y -= movementSpeed
-    }
-
-    if ( keymap.ArrowLeft ) {
-        rotation.y -= movementSpeed
-    }
-    if ( keymap.ArrowRight ) {
-        rotation.y += movementSpeed
-    }
-
-    if ( keymap.ArrowUp ) {
-        rotation.x -= movementSpeed
-    }
-    if ( keymap.ArrowDown ) {
-        rotation.x += movementSpeed
+    if ( keymap.KeyD ) {
+        position.x -= facingVector.x * movementSpeed
+        position.z -= facingVector.y * movementSpeed
     }
 
     if ( rotation.x > 360 ) { rotation.x -= 360 }
@@ -111,7 +114,6 @@ function updatePlayerMovement() {
     if ( rotation.z < -360 ) { rotation.z += 360 }
 }
 
-//Informācijas logs
 function drawInfoPanel() {
     if (!isInfoPanelOpen) {
         container.style.width = `98%`
@@ -135,13 +137,14 @@ function drawInfoPanel() {
         <h5>The Information Panel</h5>
         <hr>
         <p>Movement speed: ${movementSpeed}px
+        Camera sensitivity: ${sensitivity * 100}%
         <hr>
-        Camera coordinates:<br>
+        Players camera coordinates:<br>
         x: ${ position.x }<br>
         y: ${ position.y }<br>
         z: ${ position.z }
         <hr>
-        Camera rotation:<br>
+        Players camera rotation:<br>
         x: ${ rotation.x }<br>
         y: ${ rotation.y }<br>
         z: ${ rotation.z }
@@ -153,34 +156,27 @@ function drawInfoPanel() {
         a: move left<br>
         s: move backward<br>
         d: move right<br>
-        spacebar: move up<br>
-        shift: move down<br>
-        q: turn left<br>
-        e: turn rigth<br>
-        arrow up: tilt forward<br>
-        arrow left: tilt left<br>
-        arrow down: tilt backward<br>
-        arrow right: tilt right</p>
+        shift: sprint<br>
         <hr>
         <p id="finePrint">Other functions:<br>
         r: reset back to starting position<br>
         i: open & close the information panel<br>
-        p: change movement speed
         </p>`
-    } 
-    else {
-        alert("Info Panel has FAILED!")
     }
 }
 
-function render() {
+
+//Main game loop
+function game() {
     
     updatePlayerMovement()
     
     drawInfoPanel()
     updateWorld()
 
-    myReq = requestAnimationFrame(render)
+    myReq = requestAnimationFrame(game)
 }
 
-render()
+
+//Starting le gaem
+game()
