@@ -1,4 +1,4 @@
-//  https://www.toptal.com/developers/keycode
+//  http://www.toptal.com/developers/keycode
 
 document.addEventListener("keydown", whenButtonIsPressed)
 
