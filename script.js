@@ -9,7 +9,7 @@ document.addEventListener("keyup", onKeyRelese)
 var isInfoPanelOpen = false
 
 //Kustības ātruma lielumi
-var movementSpeed = 10
+var movementSpeed = 5
 var setMovementSpeed
 
 //Kustības koordinātes
