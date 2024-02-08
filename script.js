@@ -44,7 +44,7 @@ function onKeyRelese( event ) {
         return
     }else if ( event.code == 'KeyR' ) {
         position = vec3( 500, 250, 0 )
-        orientation = vec3( -30, 0, 0 )
+        rotation = vec3( -30, 0, 0 )
         return
     }else if( event.code == 'KeyP' ) {
         setMovementSpeed = Number(prompt("Enter a number to change movement speed.", "10"))
@@ -156,14 +156,12 @@ function drawInfoPanel() {
         a: move left<br>
         s: move backward<br>
         d: move right<br>
-        spacebar: move up<br>
-        shift: move down<br>
-        q: turn left<br>
-        e: turn rigth<br>
+        e: move up<br>
+        q: move down<br>
+        arrow left: turn left<br>
+        arrow right: turn rigth<br>
         arrow up: tilt forward<br>
-        arrow left: tilt left<br>
         arrow down: tilt backward<br>
-        arrow right: tilt right</p>
         <hr>
         <p id="finePrint">Other functions:<br>
         r: reset back to starting position<br>
