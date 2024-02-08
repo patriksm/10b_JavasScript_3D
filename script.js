@@ -1,5 +1,14 @@
 //  https://www.toptal.com/developers/keycode
 const world = document.getElementById('world')
+
+//asset box
+const square1 = document.getElementById('square1')
+const square2 = document.getElementById('square2')
+const square3 = document.getElementById('square3')
+const square4 = document.getElementById('square4')
+const square5 = document.getElementById('square5')
+const square6 = document.getElementById('square6')
+
 const container = document.getElementById('container')
 const infoWindow = document.getElementById('infoWindow')
 
@@ -8,9 +17,14 @@ document.addEventListener("keyup", onKeyRelese)
 
 var isInfoPanelOpen = false
 
+var canMoveObject = false
+
 //Kustības ātruma lielumi
 var movementSpeed = 10
 var setMovementSpeed
+
+let assetBoxPosition = vec3( 0, 0, 0 )
+let assetBoxRotation = vec3( 0, 0, 0 )
 
 //Kustības koordinātes
 let position = vec3( 500, 250, 0 )
@@ -29,7 +43,8 @@ function vec3( x = 0, y = 0, z = 0 ) {
 let keymap = { 
     KeyA : false, KeyD : false, KeyW : false, KeyS : false, KeyQ : false, KeyE : false, 
     Space : false, ShiftLeft : false, 
-    ArrowUp : false, ArrowDown : false, ArrowRight : false, ArrowLeft : false, }
+    ArrowUp : false, ArrowDown : false, ArrowRight : false, ArrowLeft : false,
+    KeyO : false, }
 
 function onKeyPress( event ) {
     
@@ -55,6 +70,10 @@ function onKeyRelese( event ) {
         }
         return
     }
+    if ( event.code == 'KeyO' ) {
+        canMoveObject = !canMoveObject
+        console.log("Can move object: ",canMoveObject)
+    }
 
     if ( keymap[ event.code ] != null ) {
         keymap[ event.code ] = false
@@ -63,42 +82,84 @@ function onKeyRelese( event ) {
 
 function updateWorld() {
     world.style.transform = `translate3d(${ position.x }px, ${ position.y }px, ${ position.z }px) rotateX(${ rotation.x }deg) rotateY(${ rotation.y }deg) rotateZ(${ rotation.z }deg)`;
+    asset_Box()
+    console.log(assetBoxPosition.x)
+}
+
+function asset_Box() {
+    square1.style.transform = `translate3d(${ assetBoxPosition.x }px, ${ assetBoxPosition.y }px, ${ assetBoxPosition.z }px) rotateX(${ assetBoxRotation.x }deg) rotateY(${ assetBoxRotation.y }deg) rotateZ(${ assetBoxRotation.z }deg)`
+    square2.style.transform = `translate3d(${ assetBoxPosition.x }px, ${ assetBoxPosition.y + 100 }px, ${ assetBoxPosition.z - 100 }px) rotateX(${ assetBoxRotation.x + 90 }deg) rotateY(${ assetBoxRotation.y }deg) rotateZ(${ assetBoxRotation.z }deg)`
+    square3.style.transform = `translate3d(${ assetBoxPosition.x }px, ${ assetBoxPosition.y }px, ${ assetBoxPosition.z - 200 }px) rotateX(${ assetBoxRotation.x }deg) rotateY(${ assetBoxRotation.y }deg) rotateZ(${ assetBoxRotation.z }deg)`
+    square4.style.transform = `translate3d(${ assetBoxPosition.x }px, ${ assetBoxPosition.y - 100 }px, ${ assetBoxPosition.z - 100 }px) rotateX(${ assetBoxRotation.x + 90 }deg) rotateY(${ assetBoxRotation.y }deg) rotateZ(${ assetBoxRotation.z }deg)`
+    square5.style.transform = `translate3d(${ assetBoxPosition.x - 100 }px, ${ assetBoxPosition.y }px, ${ assetBoxPosition.z - 100 }px) rotateX(${ assetBoxRotation.x }deg) rotateY(${ assetBoxRotation.y + 90 }deg) rotateZ(${ assetBoxRotation.z }deg)`
+    square6.style.transform = `translate3d(${ assetBoxPosition.x + 100 }px, ${ assetBoxPosition.y }px, ${ assetBoxPosition.z -100 }px) rotateX(${ assetBoxRotation.x }deg) rotateY(${ assetBoxRotation.y +90 }deg) rotateZ(${ assetBoxRotation.z }deg)`
 }
 
 function updatePlayerMovement() {
-    if ( keymap.KeyA ) {
+    if ( keymap.KeyA && !canMoveObject ) {
         position.x += movementSpeed
     }
-    if ( keymap.KeyD ) {
+    else if ( keymap.KeyA && canMoveObject ) {
+        assetBoxPosition.x -= movementSpeed
+    }
+    if ( keymap.KeyD && !canMoveObject ) {
         position.x -= movementSpeed
     }
+    else if ( keymap.KeyD && canMoveObject ) {
+        assetBoxPosition.x += movementSpeed
+    }
 
-    if ( keymap.KeyW ) {
+    if ( keymap.KeyW && !canMoveObject ) {
         position.z += movementSpeed
     }
-    if ( keymap.KeyS ) {
+    else if ( keymap.KeyW && canMoveObject ) {
+        assetBoxPosition.z -= movementSpeed
+    }
+    if ( keymap.KeyS && !canMoveObject ) {
         position.z -= movementSpeed
     }
+    else if ( keymap.KeyS && canMoveObject ) {
+        assetBoxPosition.z += movementSpeed
+    }
 
-    if ( keymap.KeyE ) {
+    if ( keymap.KeyE && !canMoveObject ) {
         position.y += movementSpeed
     }
-    if ( keymap.KeyQ ) {
+    else if ( keymap.KeyE && canMoveObject ) {
+        assetBoxPosition.y -= movementSpeed
+    }
+    if ( keymap.KeyQ && !canMoveObject ) {
         position.y -= movementSpeed
     }
+    else if ( keymap.KeyQ && canMoveObject ) {
+        assetBoxPosition.y += movementSpeed
+    }
 
-    if ( keymap.ArrowLeft ) {
+
+    if ( keymap.ArrowLeft && !canMoveObject ) {
         rotation.y -= movementSpeed
     }
-    if ( keymap.ArrowRight ) {
+    else if ( keymap.ArrowLeft && canMoveObject ) {
+        assetBoxRotation.y += movementSpeed
+    }
+    if ( keymap.ArrowRight && !canMoveObject ) {
         rotation.y += movementSpeed
     }
+    else if ( keymap.ArrowRight && canMoveObject ) {
+        assetBoxRotation.y -= movementSpeed
+    }
 
-    if ( keymap.ArrowUp ) {
+    if ( keymap.ArrowUp && !canMoveObject ) {
         rotation.x -= movementSpeed
     }
-    if ( keymap.ArrowDown ) {
+    else if ( keymap.ArrowUp && canMoveObject ) {
+        assetBoxRotation.x += movementSpeed
+    }
+    if ( keymap.ArrowDown && !canMoveObject ) {
         rotation.x += movementSpeed
+    }
+    else if ( keymap.ArrowDown && canMoveObject ) {
+        assetBoxRotation.x -= movementSpeed
     }
 
     if ( rotation.x > 360 ) { rotation.x -= 360 }
@@ -107,8 +168,10 @@ function updatePlayerMovement() {
     if ( rotation.y > 360 ) { rotation.y -= 360 }
     if ( rotation.y < -360 ) { rotation.y += 360 }
 
-    if ( rotation.z > 360 ) { rotation.z -= 360 }
-    if ( rotation.z < -360 ) { rotation.z += 360 }
+    if ( assetBoxRotation.x > 360 ) { assetBoxRotation.x -= 360 }
+    if ( assetBoxRotation.x < -360 ) { assetBoxRotation.x += 360 }
+    if ( assetBoxRotation.y > 360 ) { assetBoxRotation.y -= 360 }
+    if ( assetBoxRotation.y < -360 ) { assetBoxRotation.y += 360 }
 }
 
 //Informācijas logs
