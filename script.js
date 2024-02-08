@@ -113,6 +113,7 @@ function updatePlayerMovement() {
 
 //Informācijas logs
 function drawInfoPanel() {
+
     if (!isInfoPanelOpen) {
         container.style.width = `98%`
 
@@ -142,9 +143,11 @@ function drawInfoPanel() {
         z: ${ position.z }
         <hr>
         Camera rotation:<br>
+        
         x: ${ rotation.x }<br>
         y: ${ rotation.y }<br>
         z: ${ rotation.z }
+
         <hr>
         </p>
         <p id="finePrint">
