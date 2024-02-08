@@ -100,6 +100,15 @@ function updatePlayerMovement() {
     if ( keymap.ArrowDown ) {
         rotation.x += movementSpeed
     }
+
+    if ( rotation.x > 360 ) { rotation.x -= 360 }
+    if ( rotation.x < -360 ) { rotation.x += 360 }
+    
+    if ( rotation.y > 360 ) { rotation.y -= 360 }
+    if ( rotation.y < -360 ) { rotation.y += 360 }
+
+    if ( rotation.z > 360 ) { rotation.z -= 360 }
+    if ( rotation.z < -360 ) { rotation.z += 360 }
 }
 
 //Informācijas logs
@@ -128,14 +137,14 @@ function drawInfoPanel() {
         <p>Movement speed: ${movementSpeed}px
         <hr>
         Camera coordinates:<br>
-        x: ${x_dir}<br>
-        y: ${y_dir}<br>
-        z: ${z_dir}
+        x: ${ position.x }<br>
+        y: ${ position.y }<br>
+        z: ${ position.z }
         <hr>
         Camera rotation:<br>
-        x: ${x_rot}<br>
-        y: ${y_rot}<br>
-        z: ${z_rot}
+        x: ${ rotation.x }<br>
+        y: ${ rotation.y }<br>
+        z: ${ rotation.z }
         <hr>
         </p>
         <p id="finePrint">
