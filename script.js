@@ -138,12 +138,12 @@ function infoPanel() {
         infoWindow.innerHTML = ``
     } 
     else if (isInfoPanelOpen) {
-        container.style.width = `80%`
+        container.style.width = `84%`
 
-        infoWindow.style.width = `15%`
-        infoWindow.style.marginRight = `3%`
-        infoWindow.style.marginLeft = `2%`
-        infoWindow.style.padding = `2%`
+        infoWindow.style.width = `10%`
+        infoWindow.style.marginRight = `2%`
+        infoWindow.style.marginLeft = `1%`
+        infoWindow.style.padding = `1%`
 
         infoWindow.innerHTML = `
         <h5>The Information Panel</h5>
@@ -156,9 +156,9 @@ function infoPanel() {
         z: ${z_dir}
         <hr>
         Camera rotation:<br>
-        x: ${xRot}<br>
-        y: ${yRot}<br>
-        z: ${zRot}
+        x: ${x_deg}<br>
+        y: ${y_deg}<br>
+        z: ${z_deg}
         <hr>
         </p>
         <p id="finePrint">
