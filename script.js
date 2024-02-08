@@ -10,6 +10,7 @@ var isInfoPanelOpen = false
 
 //Kustības ātruma lielumi
 var movementSpeed = 10
+var rotationSpeed = movementSpeed / 8
 var setMovementSpeed
 
 //Kustības koordinātes
@@ -88,17 +89,17 @@ function updatePlayerMovement() {
     }
 
     if ( keymap.ArrowLeft ) {
-        rotation.y -= movementSpeed
+        rotation.y -= rotationSpeed
     }
     if ( keymap.ArrowRight ) {
-        rotation.y += movementSpeed
+        rotation.y += rotationSpeed
     }
 
     if ( keymap.ArrowUp ) {
-        rotation.x -= movementSpeed
+        rotation.x -= rotationSpeed
     }
     if ( keymap.ArrowDown ) {
-        rotation.x += movementSpeed
+        rotation.x += rotationSpeed
     }
 
     if ( rotation.x > 360 ) { rotation.x -= 360 }
