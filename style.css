@@ -79,6 +79,14 @@
     transform: translate3d(-400px, -300px, -100px) rotateX(90deg) rotateY(0deg) rotateZ(0deg);
 }
 
+#euro{
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    background-image: url(IMG/1EURO.png);
+    transform: translate3d(200px, 100px, 100px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);                                                                                                                         
+}
+
 #euro2 {
     background-image: url('IMG/2euro.png');
     position: absolute;
