@@ -5,6 +5,7 @@ const infoWindow = document.getElementById('infoWindow')
 
 const coin = document.getElementById( "euro" )
 const coin2 = document.getElementById( "euro2" )
+const saule = document.getElementById( "saule" )
 
 const deg = Math.PI / 180
 const accselFreeFall = 9.8066
@@ -25,13 +26,17 @@ let isInfoPanelOpen = false
 let movementSpeed = 6
 let sensitivity = 0.2
 
-let cameraHeight = 410
+let defaultPlayerHeight = 410
+let playerHeight = defaultPlayerHeight
+
+let cameraCrouch = 0.75
+let isCrouching = false
 
 let jumpHeight = -9.15
 let fallVelocity = 0
 let time = Date.now()
 
-let position = vec3( 500, cameraHeight, 0 )
+let position = vec3( 500, defaultPlayerHeight, 0 )
 let rotation = vec3( -30, 45, 0 )
 
 let cointRotY = 0
@@ -57,7 +62,11 @@ function onKeyPress( event ) {
     }
 }
 function onKeyRelese( event ) {
-    if ( event.code == 'Space') {
+    if (event.code == 'KeyC') {
+        isCrouching = !isCrouching
+    }
+
+    if ( event.code == 'Space' && !isCrouching) {
         fallVelocity = jumpHeight
     }
 
@@ -70,6 +79,7 @@ function onKeyRelese( event ) {
 
         return
     }else if ( event.code == 'KeyR' ) {
+        cameraHeight = 410
         position = vec3( 500, 360, 0 )
         rotation = vec3( -30, 0, 0 )
       
@@ -99,9 +109,9 @@ function updateWorld() {
         console.log("Touched");
     }
 
-    world.style.transform = `translateZ( 600px ) rotateX( ${ rotation.x }deg ) rotateY( ${ rotation.y }deg ) translate3d(${ position.x }px, ${ position.y }px, ${ position.z }px)`
-    coin.style.transform = `translate3d(200px, 100px, 100px) rotateX(0deg) rotateY(${ cointRotY }deg) rotateZ(0deg)`
-    coin2.style.transform = `translate3d(-100px, 100px, 100px) rotateX(0deg) rotateY(${ cointRotY }deg) rotateZ(0deg)`
+        coin.style.transform = `translate3d(200px, 100px, 100px) rotateX(0deg) rotateY(${ cointRotY }deg) rotateZ(0deg)`
+        coin2.style.transform = `translate3d(-100px, 100px, 100px) rotateX(0deg) rotateY(${ cointRotY }deg) rotateZ(0deg)`
+        saule.style.transform = `translate3d(0px, -1000px, 0px) rotatex(${ rotation.x }deg) rotateY(${ 0 - rotation.y }deg) rotateZ(${ 0 - rotation.z }deg)`
 }
 
 function updatePlayerMovement() {
@@ -145,8 +155,17 @@ function cameraJump() {
     fallVelocity = fallVelocity + accselFreeFall*seconds
     position.y = position.y - fallVelocity
 
-    if (position.y <= cameraHeight) {
-        position.y = cameraHeight
+    if (position.y <= playerHeight) {
+        position.y = playerHeight
+    }
+
+
+    if (isCrouching) {
+        if (playerHeight > defaultPlayerHeight*cameraCrouch) {
+            playerHeight = playerHeight*cameraCrouch
+        }
+    } else if (!isCrouching && playerHeight < defaultPlayerHeight) {
+        playerHeight = playerHeight/cameraCrouch
     }
 }
 
