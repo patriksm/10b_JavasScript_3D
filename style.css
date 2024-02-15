@@ -84,7 +84,7 @@
     width: 9000px;
     background-color: green;
     /* background-image: url('grassTx.jfif'); */
-    transform: translate3d(-4500px, -4250px, 0) rotateX(90deg) rotateY(0deg) rotateZ(0deg);
+    transform: translate3d(-4500px, -4297px, 0) rotateX(90deg) rotateY(0deg) rotateZ(0deg);
 }
 
 #euro{
@@ -165,4 +165,26 @@
     background: rgba(21, 0, 211, 0.5);
     background-image: url('zogs.jpg');
     transform: translate3d(100px, 50px, -100px) rotateX(0deg) rotateY(90deg) rotateZ(0deg);
+}
+
+/* kresais žogs */
+#kreisaiszogs{
+    position: absolute;
+    height: 150px;
+    width: 1500px;
+    background:rgba(21, 0, 211, 0.5);
+    background-image: url('zogs.jpg');
+    transform: translate3d(-1400px, 50px, -100px) rotateX(0deg) rotateY(90deg) rotateZ(0deg);
+    
+
+}
+
+/* saule */
+#saule{
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    background-size: 100%;
+    background-image: url('IMG/saule.png');
+    transform: translate3d(0px, -1000px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
 }

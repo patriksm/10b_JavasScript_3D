@@ -3,7 +3,11 @@ const world = document.getElementById('world')
 const container = document.getElementById('container')
 const infoWindow = document.getElementById('infoWindow')
 
+const coin = document.getElementById( "euro" )
+const coin2 = document.getElementById( "euro2" )
+
 const deg = Math.PI / 180
+const accselFreeFall = 9.8066
 
 document.addEventListener( "keydown", onKeyPress )
 document.addEventListener( "keyup", onKeyRelese )
@@ -21,8 +25,16 @@ let isInfoPanelOpen = false
 let movementSpeed = 6
 let sensitivity = 0.2
 
-let position = vec3( 500, 360, 0 )
+let cameraHeight = 410
+
+let jumpHeight = -9.15
+let fallVelocity = 0
+let time = Date.now()
+
+let position = vec3( 500, cameraHeight, 0 )
 let rotation = vec3( -30, 45, 0 )
+
+let cointRotY = 0
 
 //Util function
 function vec3( x = 0, y = 0, z = 0 ) {
@@ -35,8 +47,7 @@ function vec3( x = 0, y = 0, z = 0 ) {
 
 //Event callbacks
 let keymap = { 
-    KeyA : false, KeyD : false, KeyW : false, KeyS : false, KeyQ : false, KeyE : false, 
-    Space : false, ShiftLeft : false, KeyZ : false, 
+    KeyA : false, KeyD : false, KeyW : false, KeyS : false, KeyQ : false, KeyE : false, ShiftLeft : false, KeyZ : false, ControlLeft : false,
 }
 
 function onKeyPress( event ) {
@@ -46,10 +57,17 @@ function onKeyPress( event ) {
     }
 }
 function onKeyRelese( event ) {
+    if ( event.code == 'Space') {
+        fallVelocity = jumpHeight
+    }
 
     if ( event.code == 'KeyI' ) {
-        isInfoPanelOpen = !isInfoPanelOpen
-      
+        let newS = prompt( "Cik jutigu velies peliti?" )
+        
+        if ( parseFloat( newS ) && !isNaN( parseFloat( newS ) ) ) {
+            sensitivity = parseFloat( newS ) / 100
+        } 
+
         return
     }else if ( event.code == 'KeyR' ) {
         position = vec3( 500, 360, 0 )
@@ -74,6 +92,9 @@ function onMouseMove( event ) {
 function updateWorld() {
     world.style.transform = 
         `translateZ( 600px ) rotateX( ${ rotation.x }deg ) rotateY( ${ rotation.y }deg ) translate3d(${ position.x }px, ${ position.y }px, ${ position.z }px)`
+
+        coin.style.transform = `translate3d(200px, 100px, 100px) rotateX(0deg) rotateY(${ cointRotY }deg) rotateZ(0deg)`
+        coin2.style.transform = `translate3d(-100px, 100px, 100px) rotateX(0deg) rotateY(${ cointRotY }deg) rotateZ(0deg)`
 }
 
 function updatePlayerMovement() {
@@ -81,14 +102,6 @@ function updatePlayerMovement() {
         Math.cos( rotation.y * deg ),
         Math.sin( rotation.y * deg ),
     )
-
-    if ( keymap.ShiftLeft ) {
-        position.y -= movementSpeed
-    }
-
-    if (keymap.Space) {
-        position.y += movementSpeed
-    }
 
     if ( keymap.KeyW ) {
         position.z += facingVector.x * movementSpeed
@@ -116,6 +129,18 @@ function updatePlayerMovement() {
 
     if ( rotation.z > 360 ) { rotation.z -= 360 }
     if ( rotation.z < -360 ) { rotation.z += 360 }
+}
+
+function cameraJump() {
+    seconds = Math.min( (Date.now() - time) / 1000, 0.1 )
+    time = Date.now()
+
+    fallVelocity = fallVelocity + accselFreeFall*seconds
+    position.y = position.y - fallVelocity
+
+    if (position.y <= cameraHeight) {
+        position.y = cameraHeight
+    }
 }
 
 function drawInfoPanel() {
@@ -178,7 +203,11 @@ function drawInfoPanel() {
 //Main game loop
 function game() {
     
+    cointRotY += 5
+    if ( cointRotY > 360 ) { cointRotY -= 360 }
+
     updatePlayerMovement()
+    cameraJump()
     
     drawInfoPanel()
     updateWorld()
