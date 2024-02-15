@@ -78,6 +78,14 @@
     background-image: url('cracked-asphalt-texture.jpg');
     transform: translate3d(-400px, -300px, -100px) rotateX(90deg) rotateY(0deg) rotateZ(0deg);
 }
+#grass {
+    position: absolute;
+    height: 9000px;
+    width: 9000px;
+    background-color: green;
+    /* background-image: url('grassTx.jfif'); */
+    transform: translate3d(-4500px, -4250px, 0) rotateX(90deg) rotateY(0deg) rotateZ(0deg);
+}
 
 #euro2 {
     background-image: url('IMG/2euro.png');
