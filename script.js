@@ -4,6 +4,7 @@ const container = document.getElementById('container')
 const infoWindow = document.getElementById('infoWindow')
 
 const deg = Math.PI / 180
+const accselFreeFall = 9.8066
 
 document.addEventListener( "keydown", onKeyPress )
 document.addEventListener( "keyup", onKeyRelese )
@@ -21,7 +22,11 @@ let isInfoPanelOpen = false
 let movementSpeed = 6
 let sensitivity = 0.2
 
-let position = vec3( 500, 360, 0 )
+let jumpHeight = -9.15
+let fallVelocity = 0
+let time = Date.now()
+
+let position = vec3( 500, 410, 0 )
 let rotation = vec3( -30, 45, 0 )
 
 //Util function
@@ -35,8 +40,7 @@ function vec3( x = 0, y = 0, z = 0 ) {
 
 //Event callbacks
 let keymap = { 
-    KeyA : false, KeyD : false, KeyW : false, KeyS : false, KeyQ : false, KeyE : false, 
-    Space : false, ShiftLeft : false, KeyZ : false, 
+    KeyA : false, KeyD : false, KeyW : false, KeyS : false, KeyQ : false, KeyE : false, ShiftLeft : false, KeyZ : false, ControlLeft : false,
 }
 
 function onKeyPress( event ) {
@@ -46,6 +50,9 @@ function onKeyPress( event ) {
     }
 }
 function onKeyRelese( event ) {
+    if ( event.code == 'Space') {
+        fallVelocity = jumpHeight
+    }
 
     if ( event.code == 'KeyI' ) {
         isInfoPanelOpen = !isInfoPanelOpen
@@ -82,14 +89,6 @@ function updatePlayerMovement() {
         Math.sin( rotation.y * deg ),
     )
 
-    if ( keymap.ShiftLeft ) {
-        position.y -= movementSpeed
-    }
-
-    if (keymap.Space) {
-        position.y += movementSpeed
-    }
-
     if ( keymap.KeyW ) {
         position.z += facingVector.x * movementSpeed
         position.x -= facingVector.y * movementSpeed
@@ -116,6 +115,18 @@ function updatePlayerMovement() {
 
     if ( rotation.z > 360 ) { rotation.z -= 360 }
     if ( rotation.z < -360 ) { rotation.z += 360 }
+}
+
+function cameraJump() {
+    seconds = Math.min( (Date.now() - time) / 1000, 0.1 )
+    time = Date.now()
+
+    fallVelocity = fallVelocity + accselFreeFall*seconds
+    position.y = position.y - fallVelocity
+
+    if (position.y <= 410) {
+        position.y = 410
+    }
 }
 
 function drawInfoPanel() {
@@ -179,11 +190,14 @@ function drawInfoPanel() {
 function game() {
     
     updatePlayerMovement()
+    cameraJump()
     
     drawInfoPanel()
     updateWorld()
 
     myReq = requestAnimationFrame(game)
+
+    console.log(fallVelocity)
 }
 
 
