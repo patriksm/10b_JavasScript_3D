@@ -22,11 +22,13 @@ let isInfoPanelOpen = false
 let movementSpeed = 6
 let sensitivity = 0.2
 
+let cameraHeight = 410
+
 let jumpHeight = -9.15
 let fallVelocity = 0
 let time = Date.now()
 
-let position = vec3( 500, 410, 0 )
+let position = vec3( 500, cameraHeight, 0 )
 let rotation = vec3( -30, 45, 0 )
 
 //Util function
@@ -124,8 +126,8 @@ function cameraJump() {
     fallVelocity = fallVelocity + accselFreeFall*seconds
     position.y = position.y - fallVelocity
 
-    if (position.y <= 410) {
-        position.y = 410
+    if (position.y <= cameraHeight) {
+        position.y = cameraHeight
     }
 }
 
@@ -196,8 +198,6 @@ function game() {
     updateWorld()
 
     myReq = requestAnimationFrame(game)
-
-    console.log(fallVelocity)
 }
 
 
