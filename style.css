@@ -157,6 +157,7 @@
     background-image: url('brick.jpg');
     transform: translate3d(-5px, -100px, 400px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
 }
+
 /* Žogs aiz */
 #žogsaiz{
     position: absolute;
@@ -165,4 +166,35 @@
     background: rgba(21, 0, 211, 0.5);
     background-image: url('zogs.jpg');
     transform: translate3d(-650px, 50px, -800px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+  
+#zogslabapuse{
+    position: absolute;
+    height: 150px;
+    width: 1500px;
+    background: rgba(21, 0, 211, 0.5);
+    background-image: url('zogs.jpg');
+    transform: translate3d(100px, 50px, -100px) rotateX(0deg) rotateY(90deg) rotateZ(0deg);
+}
+
+/* kresais žogs */
+#kreisaiszogs{
+    position: absolute;
+    height: 150px;
+    width: 1500px;
+    background:rgba(21, 0, 211, 0.5);
+    background-image: url('zogs.jpg');
+    transform: translate3d(-1400px, 50px, -100px) rotateX(0deg) rotateY(90deg) rotateZ(0deg);
+    
+
+}
+
+/* saule */
+#saule{
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    background-size: 100%;
+    background-image: url('IMG/saule.png');
+    transform: translate3d(0px, -1000px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
 }
