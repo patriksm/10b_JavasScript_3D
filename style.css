@@ -157,6 +157,19 @@
     background-image: url('brick.jpg');
     transform: translate3d(-5px, -100px, 400px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
 }
+
+/* kresais žogs */
+#kreisaiszogs{
+    position: absolute;
+    height: 150px;
+    width: 1500px;
+    background:rgba(21, 0, 211, 0.5);
+    background-image: url('zogs.jpg');
+    transform: translate3d(-1400px, 50px, -100px) rotateX(0deg) rotateY(90deg) rotateZ(0deg);
+    
+
+}
+
 /* saule */
 #saule{
     position: absolute;
@@ -166,3 +179,4 @@
     background-image: url('IMG/saule.png');
     transform: translate3d(0px, -1000px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
 }
+
