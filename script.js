@@ -36,7 +36,7 @@ function vec3( x = 0, y = 0, z = 0 ) {
 //Event callbacks
 let keymap = { 
     KeyA : false, KeyD : false, KeyW : false, KeyS : false, KeyQ : false, KeyE : false, 
-    Space : false, ShiftLeft : false, KeyZ : false,
+    Space : false, ShiftLeft : false, KeyZ : false, 
 }
 
 function onKeyPress( event ) {
@@ -83,9 +83,11 @@ function updatePlayerMovement() {
     )
 
     if ( keymap.ShiftLeft ) {
-        movementSpeed = 10
-    }else {
-        movementSpeed = 6
+        position.y -= movementSpeed
+    }
+
+    if (keymap.Space) {
+        position.y += movementSpeed
     }
 
     if ( keymap.KeyW ) {
