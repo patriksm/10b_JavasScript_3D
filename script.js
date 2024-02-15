@@ -96,7 +96,7 @@ function updateWorld() {
 
         coin.style.transform = `translate3d(200px, 100px, 100px) rotateX(0deg) rotateY(${ cointRotY }deg) rotateZ(0deg)`
         coin2.style.transform = `translate3d(-100px, 100px, 100px) rotateX(0deg) rotateY(${ cointRotY }deg) rotateZ(0deg)`
-        saule.style.transform = `translate3d(0px, -1000px, 400px) rotateX(0deg) rotateY(${ cointRotY }deg) rotateZ(0deg)`
+        saule.style.transform = `translate3d(0px, -1000px, 0px) rotatex(${ rotation.x }deg) rotateY(${ 0 - rotation.y }deg) rotateZ(${ 0 - rotation.z }deg)`
 }
 
 function updatePlayerMovement() {
