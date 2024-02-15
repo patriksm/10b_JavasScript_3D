@@ -162,7 +162,7 @@
     position: absolute;
     height: 200px;
     width: 200px;
-    background: rgba(143, 93, 0, 1);
+    background-size: 100%;
     background-image: url('IMG/saule.png');
-    transform: translate3d(0px, 100px, 400px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: translate3d(0px, -1000px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
 }
