@@ -1,4 +1,4 @@
-//  https://www.toptal.com/developers/keycode
+// https://www.toptal.com/developers/keycode
 const world = document.getElementById('world')
 const container = document.getElementById('container')
 const infoWindow = document.getElementById('infoWindow')
