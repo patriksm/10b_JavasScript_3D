@@ -5,6 +5,7 @@ const infoWindow = document.getElementById('infoWindow')
 
 const coin = document.getElementById( "euro" )
 const coin2 = document.getElementById( "euro2" )
+const saule = document.getElementById( "saule" )
 
 const deg = Math.PI / 180
 const accselFreeFall = 9.8066
@@ -104,6 +105,7 @@ function updateWorld() {
 
         coin.style.transform = `translate3d(200px, 100px, 100px) rotateX(0deg) rotateY(${ cointRotY }deg) rotateZ(0deg)`
         coin2.style.transform = `translate3d(-100px, 100px, 100px) rotateX(0deg) rotateY(${ cointRotY }deg) rotateZ(0deg)`
+        saule.style.transform = `translate3d(0px, -1000px, 0px) rotatex(${ rotation.x }deg) rotateY(${ 0 - rotation.y }deg) rotateZ(${ 0 - rotation.z }deg)`
 }
 
 function updatePlayerMovement() {
