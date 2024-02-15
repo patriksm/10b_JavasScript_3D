@@ -83,7 +83,7 @@
     height: 9000px;
     width: 9000px;
     background-color: green;
-    /* background-image: url('grassTx.jfif'); */
+    background-image: url('IMG/grassTx.jfif');
     transform: translate3d(-4500px, -4297px, 0) rotateX(90deg) rotateY(0deg) rotateZ(0deg);
 }
 
@@ -91,7 +91,7 @@
     position: absolute;
     height: 100px;
     width: 100px;
-    background-image: url(IMG/1EURO.png);
+    background-image: url('IMG/1EURO.png');
     transform: translate3d(200px, 100px, 100px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);                                                                                                                         
 }
 
