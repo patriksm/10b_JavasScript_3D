@@ -3,6 +3,9 @@ const world = document.getElementById('world')
 const container = document.getElementById('container')
 const infoWindow = document.getElementById('infoWindow')
 
+const coin = document.getElementById( "euro" )
+const coin2 = document.getElementById( "euro2" )
+
 const deg = Math.PI / 180
 const accselFreeFall = 9.8066
 
@@ -31,6 +34,8 @@ let time = Date.now()
 let position = vec3( 500, cameraHeight, 0 )
 let rotation = vec3( -30, 45, 0 )
 
+let cointRotY = 0
+
 //Util function
 function vec3( x = 0, y = 0, z = 0 ) {
     return {
@@ -57,8 +62,12 @@ function onKeyRelese( event ) {
     }
 
     if ( event.code == 'KeyI' ) {
-        isInfoPanelOpen = !isInfoPanelOpen
-      
+        let newS = prompt( "Cik jutigu velies peliti?" )
+        
+        if ( parseFloat( newS ) && !isNaN( parseFloat( newS ) ) ) {
+            sensitivity = parseFloat( newS ) / 100
+        } 
+
         return
     }else if ( event.code == 'KeyR' ) {
         position = vec3( 500, 360, 0 )
@@ -83,6 +92,9 @@ function onMouseMove( event ) {
 function updateWorld() {
     world.style.transform = 
         `translateZ( 600px ) rotateX( ${ rotation.x }deg ) rotateY( ${ rotation.y }deg ) translate3d(${ position.x }px, ${ position.y }px, ${ position.z }px)`
+
+        coin.style.transform = `translate3d(200px, 100px, 100px) rotateX(0deg) rotateY(${ cointRotY }deg) rotateZ(0deg)`
+        coin2.style.transform = `translate3d(-100px, 100px, 100px) rotateX(0deg) rotateY(${ cointRotY }deg) rotateZ(0deg)`
 }
 
 function updatePlayerMovement() {
@@ -191,6 +203,9 @@ function drawInfoPanel() {
 //Main game loop
 function game() {
     
+    cointRotY += 5
+    if ( cointRotY > 360 ) { cointRotY -= 360 }
+
     updatePlayerMovement()
     cameraJump()
     
