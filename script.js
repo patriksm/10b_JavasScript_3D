@@ -98,7 +98,6 @@ function onMouseMove( event ) {
 }
 
 //Update functions
-
 function updateWorld() {
     world.style.transform = 
         `translateZ( 600px ) rotateX( ${ rotation.x }deg ) rotateY( ${ rotation.y }deg ) translate3d(${ position.x }px, ${ position.y }px, ${ position.z }px)`
