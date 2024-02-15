@@ -90,11 +90,11 @@
 /* Siena 3 */
 #wall3 {
     position: absolute;
-    height: 998px;
-    width: 300px;
+    height: 300px;
+    width: 1000px;
     background: rgba(236, 6, 6, 0.5);
     background-image: url('brick.jpg');
-    transform: translate3d(-50px, -449px, -599px) rotateX(0deg) rotateY(0deg) rotateZ(90deg);
+    transform: translate3d(-400px, -100px, -599px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
 }
 /* Siena 2 */
 #wall {
