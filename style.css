@@ -157,3 +157,12 @@
     background-image: url('brick.jpg');
     transform: translate3d(-5px, -100px, 400px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
 }
+/* saule */
+#saule{
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    background: rgba(143, 93, 0, 1);
+    background-image: url('saule.jpg');
+    transform: translate3d(0px, 10px, 400px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
