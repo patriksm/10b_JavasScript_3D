@@ -157,3 +157,12 @@
     background-image: url('brick.jpg');
     transform: translate3d(-5px, -100px, 400px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
 }
+
+#merc {
+    position: absolute;
+    height: 100px;
+    width: 210px;
+    background-size: 100%;
+    background-image: url('IMG/merc.png');
+    transform: translate3d(-40px, 100px, 500px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
