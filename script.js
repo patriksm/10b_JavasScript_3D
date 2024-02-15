@@ -55,17 +55,14 @@ let keymap = {
 }
 
 function onKeyPress( event ) {
-    if (event.code == 'ControlLeft') {
-        isCrouching = true
-    }
     
     if ( keymap[ event.code ] != null ) {
         keymap[ event.code ] = true
     }
 }
 function onKeyRelese( event ) {
-    if (event.code == 'ControlLeft') {
-        isCrouching = false
+    if (event.code == 'KeyC') {
+        isCrouching = !isCrouching
     }
 
     if ( event.code == 'Space' && !isCrouching) {
