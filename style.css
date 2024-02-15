@@ -157,3 +157,45 @@
     background-image: url('brick.jpg');
     transform: translate3d(-5px, -100px, 400px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
 }
+
+#tree3{
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    /* object-fit: contain; */
+    background-size: 100%;
+    /* background: #000000; */
+    background-image: url('IMG/tree3.png');
+    transform: translate3d(430px, 50px, 971px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);                                                                                                                         
+}
+
+#tree2{
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    /* object-fit: contain; */
+    background-size: 100%;
+    /* background: #000000; */
+    background-image: url('IMG/tree3.png');
+    transform: translate3d(130px, 50px, 620px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);                                                                                                                         
+}
+#tree1{
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    /* object-fit: contain; */
+    background-size: 100%;
+    /* background: #000000; */
+    background-image: url('IMG/tree3.png');
+    transform: translate3d(981px, 50px, 246px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);                                                                                                                         
+}
+
+#tree4{
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    /* object-fit: contain; */
+    background-size: 100%;
+    /* background: #000000; */
+    background-image: url('IMG/tree3.png');
+    transform: translate3d(-130px, 50px, 820px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);    
