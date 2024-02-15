@@ -25,13 +25,17 @@ let isInfoPanelOpen = false
 let movementSpeed = 6
 let sensitivity = 0.2
 
-let cameraHeight = 410
+let defaultPlayerHeight = 410
+let playerHeight = defaultPlayerHeight
+
+let cameraCrouch = 0.75
+let isCrouching = false
 
 let jumpHeight = -9.15
 let fallVelocity = 0
 let time = Date.now()
 
-let position = vec3( 500, cameraHeight, 0 )
+let position = vec3( 500, defaultPlayerHeight, 0 )
 let rotation = vec3( -30, 45, 0 )
 
 let cointRotY = 0
@@ -51,13 +55,20 @@ let keymap = {
 }
 
 function onKeyPress( event ) {
+    if (event.code == 'ControlLeft') {
+        isCrouching = true
+    }
     
     if ( keymap[ event.code ] != null ) {
         keymap[ event.code ] = true
     }
 }
 function onKeyRelese( event ) {
-    if ( event.code == 'Space') {
+    if (event.code == 'ControlLeft') {
+        isCrouching = false
+    }
+
+    if ( event.code == 'Space' && !isCrouching) {
         fallVelocity = jumpHeight
     }
 
@@ -70,6 +81,7 @@ function onKeyRelese( event ) {
 
         return
     }else if ( event.code == 'KeyR' ) {
+        cameraHeight = 410
         position = vec3( 500, 360, 0 )
         rotation = vec3( -30, 0, 0 )
       
@@ -138,8 +150,17 @@ function cameraJump() {
     fallVelocity = fallVelocity + accselFreeFall*seconds
     position.y = position.y - fallVelocity
 
-    if (position.y <= cameraHeight) {
-        position.y = cameraHeight
+    if (position.y <= playerHeight) {
+        position.y = playerHeight
+    }
+
+
+    if (isCrouching) {
+        if (playerHeight > defaultPlayerHeight*cameraCrouch) {
+            playerHeight = playerHeight*cameraCrouch
+        }
+    } else if (!isCrouching && playerHeight < defaultPlayerHeight) {
+        playerHeight = playerHeight/cameraCrouch
     }
 }
 
