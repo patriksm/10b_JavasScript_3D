@@ -98,6 +98,7 @@ function onMouseMove( event ) {
 }
 
 //Update functions
+
 function updateWorld() {
     if (
         500 > Math.round(position.x) &&
