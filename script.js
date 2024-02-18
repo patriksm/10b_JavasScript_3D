@@ -100,14 +100,8 @@ function onMouseMove( event ) {
 //Update functions
 
 function updateWorld() {
-    if (
-        500 > Math.round(position.x) &&
-        Math.round(position.x) > 400 &&
-        0 > Math.round(position.z) &&
-        Math.round(position.z) > -100
-    ) {
-        console.log("Touched");
-    }
+    world.style.transform = 
+        `translateZ( 600px ) rotateX( ${ rotation.x }deg ) rotateY( ${ rotation.y }deg ) translate3d(${ position.x }px, ${ position.y }px, ${ position.z }px)`
 
         coin.style.transform = `translate3d(200px, 100px, 100px) rotateX(0deg) rotateY(${ cointRotY }deg) rotateZ(0deg)`
         coin2.style.transform = `translate3d(-100px, 100px, 100px) rotateX(0deg) rotateY(${ cointRotY }deg) rotateZ(0deg)`
